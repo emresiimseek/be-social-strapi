@@ -1171,6 +1171,38 @@ export interface ApiPostPost extends Schema.CollectionType {
   };
 }
 
+export interface ApiWelcomePageWelcomePage extends Schema.SingleType {
+  collectionName: 'welcome_pages';
+  info: {
+    singularName: 'welcome-page';
+    pluralName: 'welcome-pages';
+    displayName: 'WelcomePage';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    bg_image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::welcome-page.welcome-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::welcome-page.welcome-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1195,6 +1227,7 @@ declare module '@strapi/types' {
       'api::event-request.event-request': ApiEventRequestEventRequest;
       'api::notification.notification': ApiNotificationNotification;
       'api::post.post': ApiPostPost;
+      'api::welcome-page.welcome-page': ApiWelcomePageWelcomePage;
     }
   }
 }
