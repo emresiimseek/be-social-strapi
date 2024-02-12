@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "singularName": "notification",
+    "pluralName": "notifications",
+    "displayName": "Notification"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "me": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notifications"
+    },
+    "related_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notifications"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "notifications"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "follow_user",
+        "comment_event",
+        "comment_post",
+        "comment-reply_event",
+        "comment-reply_post",
+        "like_event",
+        "like_post",
+        "request_to_join_event",
+        "event_request_accepted",
+        "event_request_rejected"
+      ]
+    },
+    "event_request": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-request.event-request",
+      "inversedBy": "notifications"
+    },
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post.post",
+      "inversedBy": "notifications"
+    },
+    "comment": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::comment.comment",
+      "inversedBy": "notifications"
+    }
+  }
+}
